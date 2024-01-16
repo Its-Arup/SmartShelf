@@ -73,7 +73,7 @@ function Library() {
       <Flex flexDirection={"column"} p={5}>
         <p> User : {user.userName}</p>
         <p>
-          Access :
+          Access Role :
           {user.role.map((ele, i) => (
             <span style={{ padding: "5px" }} key={i}>
               {ele}
