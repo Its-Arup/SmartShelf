@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
   Button,
-  Container,
   Flex,
-  Heading,
-  Spacer,
   useDisclosure,
-  Box,
   Input,
   Select,
   Grid,
@@ -20,6 +16,8 @@ function Library() {
   const [order, setOrder] = useState("");
   const [searchinp, setsearchinp] = useState("");
   const [sort, setSort] = useState("");
+  const [bookTimingBefore, setBookTimingBefore] = useState("");
+  const [bookTimingAfter, setBookTimingAfter] = useState("");
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { books } = useSelector((store) => store.bookReducer);
@@ -42,16 +40,32 @@ function Library() {
     setSort(e.target.value);
   };
 
+  // this is function is handeling 10mis before addded books
+
+  const handleBefore = ()=>{
+    setBookTimingBefore(1)
+    setBookTimingAfter("")
+  }
+
+  // this function is handeling addded books in last 10mis  
+  const handleAfter = ()=>{
+    setBookTimingAfter(1)
+    setBookTimingBefore("")
+  }
+
 
   useEffect(() => {
+
     let params = {
       order: order,
       q: searchinp,
       sort: sort,
+      old : bookTimingBefore,
+      _new : bookTimingAfter
     };
 
     dispatch(GetBooks(params));
-  }, [order, searchinp, sort]);
+  }, [order, searchinp, sort,bookTimingBefore,bookTimingAfter]);
 
   console.log(books);
   return (
@@ -100,9 +114,8 @@ function Library() {
           </Select>
         </Flex>
         <Flex justifyContent="space-evenly">
-          <Button colorScheme="blue">New</Button>
-
-          <Button colorScheme="blue">Old</Button>
+          <Button colorScheme="blue" onClick={handleAfter}>Resent Added</Button>
+          <Button colorScheme="blue" onClick={handleBefore}>Old Added</Button>
         </Flex>
       </Grid>
 
