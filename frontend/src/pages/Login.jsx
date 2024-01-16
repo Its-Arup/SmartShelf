@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { Box, Button, Heading, Input, Stack, Text } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { loginUser } from "../redux/auth/action";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function Login() {
   const [userData, setUserData] = useState({ email: "", password: "" });
+  const user = useSelector((store) => store.authReducer);
 
   const dispatch = useDispatch();
-  
-  const handelChange = (e) => {
+
+  const handleChange = (e) => {
     setUserData((prev) => {
       return {
         ...prev,
@@ -20,7 +21,7 @@ function Login() {
     });
   };
 
-  const handelSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(loginUser(userData, toast));
     setUserData({
@@ -29,6 +30,10 @@ function Login() {
     });
   };
 
+  if (user.isLoggedIn) {
+    return <Navigate to={"/"} />;
+  }
+  
   return (
     <Box
       maxW={{ base: "90%", md: "400px" }}
@@ -43,21 +48,21 @@ function Login() {
         Login
       </Heading>
       <ToastContainer autoClose={3000} />
-      <form onSubmit={handelSubmit}>
+      <form onSubmit={handleSubmit}>
         <Stack spacing={4}>
           <Input
             type="email"
             placeholder="johndoe@gmail.com"
             name="email"
             value={userData.email}
-            onChange={handelChange}
+            onChange={handleChange}
           />
           <Input
             type="password"
             placeholder="*********"
             name="password"
             value={userData.password}
-            onChange={handelChange}
+            onChange={handleChange}
           />
           <Button type="submit" colorScheme="blue" width="full">
             Log in
