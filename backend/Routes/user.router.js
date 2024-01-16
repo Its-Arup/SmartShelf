@@ -16,17 +16,17 @@ UserRouter.post("/register", async (req, res) => {
   try {
     let obj = req.body;
     if (!obj.userName) {
-      return res.status(200).send({ message: "Username is required" });
+      return res.status(400).send({ message: "Username is required" });
     }
     if (!obj.email) {
-      return res.status(200).send({ message: "Email is required" });
+      return res.status(400).send({ message: "Email is required" });
     }
     if (!obj.password) {
-      return res.status(200).send({ message: "Password is required" });
+      return res.status(400).send({ message: "Password is required" });
     }
 
     if (!/(?=.*[A-Z])(?=.*\d)/.test(obj.password)) {
-      return res.status(200).send({
+      return res.status(400).send({
         message:
           "Password must contain at least one uppercase letter and one number",
       });

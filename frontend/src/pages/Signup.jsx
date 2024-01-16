@@ -26,7 +26,7 @@ function Signup() {
         </Stack>
       </form>
       <Text fontSize="sm" mt={4}>
-        already have account | <Link to="/">Login</Link>
+        Already have account | <Link to="/">Login</Link>
       </Text>
     </Box>
   );
