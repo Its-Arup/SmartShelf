@@ -68,7 +68,7 @@ UserRouter.post("/login", async (req, res) => {
 
     if (!user) {
       return res
-        .status(200)
+        .status(400)
         .send({ message: "This EmailId is not registered" });
     } else {
       bcrypt.compare(
@@ -86,7 +86,7 @@ UserRouter.post("/login", async (req, res) => {
               user
             });
           } else {
-            res.status(200).send({ message: "Incorrect Password" });
+            res.status(400).send({ message: "Incorrect Password" });
           }
         }
       );

@@ -13,8 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { registerUser } from "../redux/auth/action";
 
 function Signup() {
@@ -89,7 +88,6 @@ function Signup() {
       <Heading mb={4} textAlign="center">
         SignUp
       </Heading>
-      <ToastContainer autoClose={3000} />
       <form onSubmit={handleSubmit}>
         <Stack spacing={4}>
           <FormControl>

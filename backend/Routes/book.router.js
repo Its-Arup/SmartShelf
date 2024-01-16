@@ -12,13 +12,34 @@ BookRouter.get("/", async (req, res) => {
   try {
     const { userId } = req.body;
     const user = await UserModel.findOne({ _id: userId });
-    
+  
+    const { q , old , order , _new ,sort } = req.query;    
+    let query = {};
+
+    const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000); // 10 minutes ago
+    if (old == 1) {
+      query.createdAt = { $lte: tenMinutesAgo };
+    } else if (_new  == 1) {
+      query.createdAt = { $gte: tenMinutesAgo };
+    }
+    let sortOrder = {}
+
+    sortOrder.createdAt = order == "oldtonew" ? 1 : -1 ;
+
+    if (q) {
+      query.title = { $regex: q, $options: "i" };
+    }
+
+    if(sort){
+      query.genre = { $regex: sort, $options: "i" }
+    }
 
     if (user.role.includes("VIEW_ALL")) {
-      const allBooks = await BookModel.find();
+      const allBooks = await BookModel.find(query).sort(sortOrder);
       res.status(200).send({ allBooks });
     } else if (user.role.includes("VIEWER")) {
-      const myBooks = await BookModel.find({ userId });
+      query.userId = userId;
+      const myBooks = await BookModel.find(query).sort(sortOrder);
       res.status(200).send({ myBooks });
     } else {
       res.status(200).send({ msg: "user role error" });
@@ -27,9 +48,6 @@ BookRouter.get("/", async (req, res) => {
     res.status(400).send({ msg: error.message });
   }
 });
-
-
-
 
 // ---------- Create new book ----------
 
@@ -44,11 +62,11 @@ BookRouter.post("/", async (req, res) => {
       const books = new BookModel(req.body);
       await books.save();
       res.status(200).send({ msg: "book added successfuly", books });
+    } else {
+      res
+        .status(200)
+        .send({ msg: "User don't have permission to create book" });
     }
-    else{
-      res.status(200).send({ msg: "User don't have permission to create book"});
-    }
-    
   } catch (error) {
     res.status(400).send({ msg: error.message });
   }

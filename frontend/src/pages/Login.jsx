@@ -47,7 +47,6 @@ function Login() {
       <Heading mb={4} textAlign="center">
         Login
       </Heading>
-      <ToastContainer autoClose={3000} />
       <form onSubmit={handleSubmit}>
         <Stack spacing={4}>
           <Input

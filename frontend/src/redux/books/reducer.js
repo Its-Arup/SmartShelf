@@ -1,14 +1,24 @@
+import { ADD_BOOK_SUCCESS, GET_BOOK_SUCCESS } from "./actionType";
+
 const initState = {
   books: [],
 };
 
 export const reducer = (state = initState, { type, payload }) => {
   switch (type) {
-    default: 
+    case ADD_BOOK_SUCCESS:
+      return {
+        ...state,
+        books: [...state.books, payload],
+      };
+    case GET_BOOK_SUCCESS:
+      return {
+        ...state,
+        books: [...payload],
+      };
+    default:
       return {
         ...state,
       };
-    
   }
 };
-

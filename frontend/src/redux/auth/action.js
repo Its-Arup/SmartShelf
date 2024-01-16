@@ -10,7 +10,7 @@ const Base_URL = import.meta.env.VITE_BASE_URL
 export const registerUser = (data, toast) => (dispatch) => {  
     dispatch({ type: USER_REQUEST });
     axios
-      .post(`${Base_URL}/register`, data)
+      .post(`${Base_URL}/user/register`, data)
       .then((res) => {
         toast.success(res.data.message, {
           theme: "colored",
@@ -34,7 +34,7 @@ export const registerUser = (data, toast) => (dispatch) => {
 export const loginUser = (data, toast) => (dispatch) => {
     dispatch({ type: USER_REQUEST });
     axios
-      .post(`${Base_URL}/login`, data)
+      .post(`${Base_URL}/user/login`, data)
       .then((res) => {
         console.log(res.data);
         toast.success(res.data.message, {
@@ -42,7 +42,7 @@ export const loginUser = (data, toast) => (dispatch) => {
           autoClose: 3000,
         });
         dispatch({ type: LOGIN_USER_SUCCESS, payload: res.data });
-        
+        localStorage.setItem("token", res.data.token);
       })
       .catch((err) => {
         toast.error(err.message, {
