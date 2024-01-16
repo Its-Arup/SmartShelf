@@ -5,3 +5,7 @@ export const ADD_BOOK_FALIURE = "ADD_BOOK_FALIURE";
 // ----------------------------------------------------------------
 
 export const GET_BOOK_SUCCESS = "GET_BOOK_SUCCESS";
+
+// ----------------------------------------------------------------
+
+export const DELETE_BOOK_SUCCESS = "DELETE_BOOK_SUCCESS"

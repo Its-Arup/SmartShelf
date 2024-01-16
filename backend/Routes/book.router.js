@@ -114,7 +114,7 @@ BookRouter.delete("/delete/:bookid", async (req, res) => {
       if (userId === book.userId) {
         await BookModel.findByIdAndDelete({ _id: bookid });
 
-        res.status(200).send({ message: "Book deleted successfully" });
+        res.status(200).send({ message: "Book deleted successfully", bookId : bookid });
       } else {
         res.status(200).send({ error: "Not authorized!" });
       }
