@@ -37,3 +37,5 @@
 ::1 - - [16/Jan/2024:17:51:33 +0000] "POST /user/login HTTP/1.1" 200 430
 ::1 - - [16/Jan/2024:17:52:29 +0000] "POST /user/login HTTP/1.1" 200 430
 ::1 - - [16/Jan/2024:17:54:09 +0000] "POST /user/register HTTP/1.1" 200 226
+::1 - - [16/Jan/2024:17:57:08 +0000] "POST /user/register HTTP/1.1" 200 226
+::1 - - [16/Jan/2024:17:57:17 +0000] "POST /user/login HTTP/1.1" 200 32

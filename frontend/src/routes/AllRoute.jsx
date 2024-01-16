@@ -2,8 +2,8 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
-import Home from "../pages/Home";
 import PrivateRoute from "./PrivateRoute";
+import Library from "../pages/Library";
 function AllRoute() {
   return (
     <Routes>
@@ -11,7 +11,7 @@ function AllRoute() {
         path="/"
         element={
           <PrivateRoute>
-            <Home />
+            <Library />
           </PrivateRoute>
         }
       />
