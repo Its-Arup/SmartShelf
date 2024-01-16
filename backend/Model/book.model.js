@@ -5,6 +5,7 @@ const bookSchema = mongoose.Schema({
     author : String,
     createdAt: { type: Date, default: Date.now },
     userId : String,
+    genre : String
   });
   
   const BookModel = mongoose.model('Book', bookSchema);

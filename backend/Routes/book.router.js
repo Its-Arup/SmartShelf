@@ -11,8 +11,8 @@ BookRouter.use(auth);
 BookRouter.get("/", async (req, res) => {
   try {
     const { userId } = req.body;
- 
     const user = await UserModel.findOne({ _id: userId });
+    
 
     if (user.role.includes("VIEW_ALL")) {
       const allBooks = await BookModel.find();
