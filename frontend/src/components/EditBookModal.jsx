@@ -24,7 +24,6 @@ function EditBookModal({ isOpen, onClose, id, toast }) {
         genre: "",
       });
       
-      console.log(id);
       const dispatch = useDispatch();
     
       const handleChange = (e) => {

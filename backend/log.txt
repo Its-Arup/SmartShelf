@@ -178,3 +178,14 @@
 ::1 - - [17/Jan/2024:00:38:09 +0000] "GET /books?order=&q=&sort=&old=&_new= HTTP/1.1" 304 -
 ::1 - - [17/Jan/2024:00:38:38 +0000] "POST /books HTTP/1.1" 200 214
 ::1 - - [17/Jan/2024:00:41:08 +0000] "GET /books?order=&q=&sort=&old=&_new= HTTP/1.1" 200 531
+::1 - - [17/Jan/2024:00:48:46 +0000] "POST /user/login HTTP/1.1" 200 430
+::1 - - [17/Jan/2024:00:48:47 +0000] "GET /books?order=&q=&sort=&old=&_new= HTTP/1.1" 304 -
+::1 - - [17/Jan/2024:00:49:22 +0000] "PATCH /books/65a719a504baab840c074db4 HTTP/1.1" 200 214
+::1 - - [17/Jan/2024:00:49:37 +0000] "PATCH /books/65a719a504baab840c074db4 HTTP/1.1" 200 219
+::1 - - [17/Jan/2024:00:54:46 +0000] "POST /user/login HTTP/1.1" 200 430
+::1 - - [17/Jan/2024:00:54:46 +0000] "GET /books?order=&q=&sort=&old=&_new= HTTP/1.1" 200 530
+::1 - - [17/Jan/2024:00:55:08 +0000] "PATCH /books/65a719a504baab840c074db4 HTTP/1.1" 200 221
+::1 - - [17/Jan/2024:00:56:58 +0000] "POST /user/login HTTP/1.1" 200 430
+::1 - - [17/Jan/2024:00:56:59 +0000] "GET /books?order=&q=&sort=&old=&_new= HTTP/1.1" 200 532
+::1 - - [17/Jan/2024:00:57:08 +0000] "PATCH /books/65a719a504baab840c074db4 HTTP/1.1" 200 214
+::1 - - [17/Jan/2024:00:57:16 +0000] "PATCH /books/65a719a504baab840c074db4 HTTP/1.1" 200 218
