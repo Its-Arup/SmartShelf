@@ -113,8 +113,8 @@ function Library() {
           </Select>
         </Flex>
         <Flex justifyContent="space-evenly">
-          <Button colorScheme="blue" onClick={handleAfter}>Resent Added</Button>
-          <Button colorScheme="blue" onClick={handleBefore}>Old Added</Button>
+          <Button colorScheme="blue" onClick={handleAfter}>New Books</Button>
+          <Button colorScheme="blue" onClick={handleBefore}>Old Books</Button>
         </Flex>
       </Grid>
 
