@@ -85,7 +85,6 @@ BookRouter.patch("/:bookid", async (req, res) => {
       if (userId === book.userId) {
         await BookModel.findByIdAndUpdate({ _id: bookid }, req.body);
         let updatedBook = await BookModel.findOne({ _id: bookid });
-
         res
           .status(200)
           .send({ message: "Book updated successfully", book: updatedBook });

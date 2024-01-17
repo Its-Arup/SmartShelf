@@ -3,6 +3,7 @@ import {
   ADD_BOOK_REQUEST,
   ADD_BOOK_SUCCESS,
   DELETE_BOOK_SUCCESS,
+  EDIT_BOOK_SUCCESS,
   GET_BOOK_SUCCESS,
 } from "./actionType";
 const Base_URL = import.meta.env.VITE_BASE_URL;
@@ -23,9 +24,7 @@ export const AddBook = (data) => (dispatch) => {
     .then((res) => {
       dispatch({ type: ADD_BOOK_SUCCESS, payload: res.data.books });
     })
-    .catch((err) => {
-     
-    });
+    .catch((err) => {});
 };
 
 export const GetBooks = (params) => (dispatch) => {
@@ -41,11 +40,10 @@ export const GetBooks = (params) => (dispatch) => {
     .then((res) => {
       dispatch({ type: GET_BOOK_SUCCESS, payload: res.data.allBooks });
     })
-    .catch((err) => {
-    });
+    .catch((err) => {});
 };
 
-export const DeleteBook = (id) => (dispatch) => {
+export const DeleteBook = (id, toast) => (dispatch) => {
   axios({
     method: "DELETE",
     url: `${Base_URL}/books/delete/${id}`,
@@ -54,10 +52,35 @@ export const DeleteBook = (id) => (dispatch) => {
       Authorization: `Bearer ${Token}`,
     },
   })
-  .then((res)=>{
-    dispatch({type : DELETE_BOOK_SUCCESS, payload : res.data})
+    .then((res) => {
+      toast.success(res.data.message, {
+        theme: "colored",
+        autoClose: 3000,
+      });
+      dispatch({ type: DELETE_BOOK_SUCCESS, payload: res.data });
+    })
+    .catch((err) => {
+      toast.error(err.message, {
+        theme: "colored",
+        autoClose: 3000,
+      });
+    });
+};
+
+export const EditBook = (id, payload, toast) => (dispatch) => {
+  axios({
+    method: "PATCH",
+    url: `${Base_URL}/books/${id}`,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${Token}`,
+    },
+    data: payload,
+  }).then((res) => {
+    console.log(res.data)
+    dispatch({ type: EDIT_BOOK_SUCCESS, payload: res.data });
   })
-  .catch((err)=>{
-    console.log(err);
+  .catch((err) => {
+
   })
 };

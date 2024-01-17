@@ -67,7 +67,6 @@ function Library() {
     dispatch(GetBooks(params));
   }, [order, searchinp, sort,bookTimingBefore,bookTimingAfter]);
 
-  console.log(books);
   return (
     <>
       <Flex flexDirection={"column"} p={5}>

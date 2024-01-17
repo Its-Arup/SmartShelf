@@ -36,7 +36,6 @@ export const loginUser = (data, toast) => (dispatch) => {
     axios
       .post(`${Base_URL}/user/login`, data)
       .then((res) => {
-        console.log(res.data);
         toast.success(res.data.message, {
           theme: "colored",
           autoClose: 3000,

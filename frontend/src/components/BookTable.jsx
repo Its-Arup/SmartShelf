@@ -8,25 +8,36 @@ import {
   Td,
   TableContainer,
   Button,
+  useDisclosure,
 } from "@chakra-ui/react";
 import moment from "moment";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { DeleteBook } from "../redux/books/action";
+import EditBookModal from "./EditBookModal";
 
 function BookTable() {
+
+  const[bookId, setBookId] =useState("");
+
   const { books } = useSelector((store) => store.bookReducer);
   const { user } = useSelector((store) => store.authReducer);
 
   const dispatch = useDispatch()
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleDeleteBook = (id)=>{
-    console.log(id);
-    dispatch(DeleteBook(id))
+    dispatch(DeleteBook(id,toast))
   }
 
-  
+  const handleEdit = (id) => {
+    setBookId(id)
+    onOpen()
+  }
+
   return (
+    <>
     <TableContainer p={5}>
       <Table variant="striped" colorScheme="teal" size={"lg"} mt={10}>
         <Thead>
@@ -50,7 +61,8 @@ function BookTable() {
                   <Td>{moment(ele.createdAt).format("YYYY-MM-DD HH:mm:ss")}</Td>
                   {user._id == ele.userId && (
                     <Td>
-                      <Button colorScheme="blue">Edit</Button>
+                      <Button colorScheme="blue" onClick={()=>handleEdit(ele._id)}>Edit</Button>
+                      
                     </Td>
                   )}
                   {user._id == ele.userId && (
@@ -64,6 +76,8 @@ function BookTable() {
         </Tbody>
       </Table>
     </TableContainer>
+    <EditBookModal isOpen={isOpen} onClose={onClose} id={bookId}/>
+    </>
   );
 }
 
