@@ -77,10 +77,16 @@ export const EditBook = (id, payload, toast) => (dispatch) => {
     },
     data: payload,
   }).then((res) => {
-    console.log(res.data)
+    toast.success(res.data.message, {
+      theme: "colored",
+      autoClose: 3000,
+    });
     dispatch({ type: EDIT_BOOK_SUCCESS, payload: res.data });
   })
   .catch((err) => {
-
+    toast.error(err.message, {
+      theme: "colored",
+      autoClose: 3000,
+    });
   })
 };

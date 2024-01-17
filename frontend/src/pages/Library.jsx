@@ -73,7 +73,7 @@ function Library() {
         <p> User : {user.userName}</p>
         <p>
           Access Role :
-          {user.role >0 && user.role.map((ele, i) => (
+          {user.role?.map((ele, i) => (
             <span style={{ padding: "5px" }} key={i}>
               {ele}
             </span>
