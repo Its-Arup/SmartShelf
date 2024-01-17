@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 function PrivateRoute({ children }) {
   const user = useSelector((store) => store.authReducer);
   
-  return user.token ? children : <Navigate to={"/login"} />;
+  return user.isLoggedIn ? children : <Navigate to={"/login"} />;
 }
 
 export default PrivateRoute;
