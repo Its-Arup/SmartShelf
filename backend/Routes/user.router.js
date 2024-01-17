@@ -59,6 +59,18 @@ UserRouter.post("/register", async (req, res) => {
   }
 });
 
+// ---------------- update user Role ---------
+
+UserRouter.patch("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await UserModel.findByIdAndUpdate({ _id: id }, req.body);
+    res.status(200).send({ message: "Role updated successfully", user: user });
+  } catch (error) {
+    res.status(400).send({ message: error.message });
+  }
+});
+
 // ------------- login user --------------
 
 UserRouter.post("/login", async (req, res) => {
@@ -71,25 +83,21 @@ UserRouter.post("/login", async (req, res) => {
         .status(400)
         .send({ message: "This EmailId is not registered" });
     } else {
-      bcrypt.compare(
-        password,
-        user.password,
-        (err, result) => {
-          if (result) {
-            const token = jwt.sign(
-              { userName: user.userName, userId: user._id },
-              KEY
-            );
-            res.status(200).send({
-              message: "Logged in Successfully",
-              token,
-              user
-            });
-          } else {
-            res.status(400).send({ message: "Incorrect Password" });
-          }
+      bcrypt.compare(password, user.password, (err, result) => {
+        if (result) {
+          const token = jwt.sign(
+            { userName: user.userName, userId: user._id },
+            KEY
+          );
+          res.status(200).send({
+            message: "Logged in Successfully",
+            token,
+            user,
+          });
+        } else {
+          res.status(400).send({ message: "Incorrect Password" });
         }
-      );
+      });
     }
   } catch (err) {
     res.status(400).send({ message: err.message });

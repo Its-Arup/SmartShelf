@@ -1,5 +1,5 @@
 import axios from "axios";
-import { USER_FALIURE, USER_REQUEST, LOGIN_USER_SUCCESS, CREATE_USER_SUCCESS, LOGOUT_USER_SUCCESS } from "./actionType";
+import { USER_FALIURE, USER_REQUEST, LOGIN_USER_SUCCESS, CREATE_USER_SUCCESS, LOGOUT_USER_SUCCESS, UPDATE_USER_ROLE } from "./actionType";
 
 const Base_URL = import.meta.env.VITE_BASE_URL
 
@@ -28,6 +28,15 @@ export const registerUser = (data, toast) => (dispatch) => {
       });
   };
 
+
+  export const updateRole =(id,payload) =>(dispatch)=>{
+    axios.patch(`${Base_URL}/user/${id}`, payload)
+    .then((res)=>{
+      dispatch({type:UPDATE_USER_ROLE, payload: res.data});
+    })
+    .catch((err) => {
+    })
+  }
 
 // ------- Login user function ---------
 

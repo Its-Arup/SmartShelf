@@ -28,9 +28,8 @@ export const AddBook = (data) => (dispatch) => {
 };
 
 export const GetBooks = (params) => (dispatch) => {
-
   axios({
-    method: "GET",
+    method: "get",
     url: `${Base_URL}/books`,
     headers: {
       "Content-Type": "application/json",
@@ -39,16 +38,17 @@ export const GetBooks = (params) => (dispatch) => {
     params: params,
   })
     .then((res) => {
-      dispatch({ type: GET_BOOK_SUCCESS, payload: res.data.allBooks });
+      console.log(res.data);
+      dispatch({ type: GET_BOOK_SUCCESS, payload: res.data });
     })
     .catch((err) => {
-      
+      console.log(err.message);
     });
 };
 
 export const DeleteBook = (id, toast) => (dispatch) => {
   axios({
-    method: "DELETE",
+    method: "delete",
     url: `${Base_URL}/books/delete/${id}`,
     headers: {
       "Content-Type": "application/json",

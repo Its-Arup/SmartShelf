@@ -35,7 +35,6 @@ function BookTable() {
     setBookId(id)
     onOpen()
   }
-
   return (
     <>
     <TableContainer p={5}>

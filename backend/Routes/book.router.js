@@ -12,7 +12,7 @@ BookRouter.get("/", async (req, res) => {
   try {
     const { userId } = req.body;
     const user = await UserModel.findOne({ _id: userId });
-  
+    
     const { q , old , order , _new ,sort } = req.query;    
     let query = {};
 
@@ -32,20 +32,20 @@ BookRouter.get("/", async (req, res) => {
     }
 
     if(sort){
-      query.genre = { $regex: sort, $options: "i" }
+      query.genre = sort
     }
 
-
-    if (user.role.includes("VIEWER")) {
-      query.userId = userId;
-      const myBooks = await BookModel.find(query).sort(sortOrder);
-      res.status(200).send({ myBooks });
-    } else if (user.role.includes("VIEW_ALL")) {
+    if (user.role.includes("VIEW_ALL")) {
       const allBooks = await BookModel.find(query).sort(sortOrder);
       res.status(200).send({ allBooks });
-    }  else {
-      res.status(200).send({ msg: "user role error" });
+    }else if (user.role.includes("VIEWER")) {
+      query.userId = userId;
+      const allBooks = await BookModel.find(query).sort(sortOrder);
+      res.status(200).send({ allBooks });
+    }else {
+      res.status(200).send({ msg: "Creater not allowed to view books" });
     }
+
   } catch (error) {
     res.status(400).send({ msg: error.message });
   }
