@@ -2,7 +2,7 @@ import { CREATE_USER_SUCCESS, LOGIN_USER_SUCCESS, USER_FALIURE, USER_REQUEST } f
 
 const initState = {
   user: {},
-  token: "",
+  token: localStorage.getItem("token") || "",
   isLoggedIn: false,
   loading: false,
   error: false,
