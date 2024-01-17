@@ -30,7 +30,7 @@ export const AddBook = (data) => (dispatch) => {
 export const GetBooks = (params) => (dispatch) => {
   axios({
     method: "get",
-    url: `${Base_URL}/books`,
+    url: `${Base_URL}/books/`,
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${Token}`,
