@@ -12,7 +12,6 @@ require("dotenv").config();
 app.use(cors());
 app.use(express.json());
 
-
 // ----- logger middleWare -----
 
 app.use(
@@ -23,16 +22,16 @@ app.use(
   })
 );
 
-
+app.use("/", (req, res) => {
+  res.status(200).send({ msg: "Welcome to home page" });
+});
 
 app.use("/books", BookRouter);
 app.use("/user", UserRouter);
 
 const PORT = process.env.PORT || 8080;
 
-
 // ------- server listning port -----
-
 
 app.listen(PORT, async () => {
   try {
