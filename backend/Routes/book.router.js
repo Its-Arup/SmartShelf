@@ -18,10 +18,10 @@ BookRouter.get("/", async (req, res) => {
 
     const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000); // 10 minutes ago
     if (old == 1) {
-      query.createdAt = { $lte: tenMinutesAgo };
+      query.createdAt = { $gte: tenMinutesAgo };
     } 
     if (_new  == 1) {
-      query.createdAt = { $gte: tenMinutesAgo };
+      query.createdAt = { $lte: tenMinutesAgo };
     }
     let sortOrder = {}
 
