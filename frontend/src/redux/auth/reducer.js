@@ -1,4 +1,4 @@
-import { CREATE_USER_SUCCESS, LOGIN_USER_SUCCESS, USER_FALIURE, USER_REQUEST } from "./actionType";
+import { CREATE_USER_SUCCESS, LOGIN_USER_SUCCESS, LOGOUT_USER_SUCCESS, USER_FALIURE, USER_REQUEST } from "./actionType";
 
 const initState = {
   user: {},
@@ -38,6 +38,10 @@ export const reducer = (state = initState, { type, payload }) => {
         loading: false,
         error: true,
       };
+    case LOGOUT_USER_SUCCESS :
+      return {
+        ...initState, 
+      }
     default:
       return {
         ...state,

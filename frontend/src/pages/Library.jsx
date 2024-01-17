@@ -11,6 +11,8 @@ import AddBookModal from "../components/AddBookModal";
 import { useDispatch, useSelector } from "react-redux";
 import { GetBooks } from "../redux/books/action";
 import BookTable from "../components/BookTable";
+import { Navigate } from "react-router-dom";
+
 
 function Library() {
   const [order, setOrder] = useState("");
@@ -21,7 +23,7 @@ function Library() {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { books } = useSelector((store) => store.bookReducer);
-  const { user } = useSelector((store) => store.authReducer);
+  const { user , isLoggedIn } = useSelector((store) => store.authReducer);
 
   const dispatch = useDispatch();
 
@@ -56,17 +58,31 @@ function Library() {
 
   useEffect(() => {
 
-    let params = {
-      order: order,
-      q: searchinp,
-      sort: sort,
-      old : bookTimingBefore,
-      _new : bookTimingAfter
-    };
+    let params = {};
+
+    if(order){
+      params.order = order;
+    }
+    if(searchinp){
+      params.q = searchinp;
+    }
+    if(sort){
+      params.sort = sort;
+    }
+    if(bookTimingBefore){
+      params.old = bookTimingBefore;
+    }
+    if(bookTimingAfter){
+      params._new = bookTimingAfter;
+    }
 
     dispatch(GetBooks(params));
   }, [order, searchinp, sort,bookTimingBefore,bookTimingAfter]);
 
+ 
+  if(!isLoggedIn){
+    return <Navigate to={"/login"}/>
+  }
   return (
     <>
       <Flex flexDirection={"column"} p={5}>

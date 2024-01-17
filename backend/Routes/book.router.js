@@ -19,7 +19,8 @@ BookRouter.get("/", async (req, res) => {
     const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000); // 10 minutes ago
     if (old == 1) {
       query.createdAt = { $lte: tenMinutesAgo };
-    } else if (_new  == 1) {
+    } 
+    if (_new  == 1) {
       query.createdAt = { $gte: tenMinutesAgo };
     }
     let sortOrder = {}
@@ -34,14 +35,15 @@ BookRouter.get("/", async (req, res) => {
       query.genre = { $regex: sort, $options: "i" }
     }
 
-    if (user.role.includes("VIEW_ALL")) {
-      const allBooks = await BookModel.find(query).sort(sortOrder);
-      res.status(200).send({ allBooks });
-    } else if (user.role.includes("VIEWER")) {
+
+    if (user.role.includes("VIEWER")) {
       query.userId = userId;
       const myBooks = await BookModel.find(query).sort(sortOrder);
       res.status(200).send({ myBooks });
-    } else {
+    } else if (user.role.includes("VIEW_ALL")) {
+      const allBooks = await BookModel.find(query).sort(sortOrder);
+      res.status(200).send({ allBooks });
+    }  else {
       res.status(200).send({ msg: "user role error" });
     }
   } catch (error) {
