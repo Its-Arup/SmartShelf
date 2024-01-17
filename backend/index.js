@@ -22,7 +22,7 @@ app.use(
   })
 );
 
-app.use("/", (req, res) => {
+app.get("/", (req, res) => {
   res.status(200).send({ msg: "Welcome to home page" });
 });
 
